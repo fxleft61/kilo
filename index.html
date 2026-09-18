@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#486f55" />
+    <title>Denge — Kilo Takibi</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header>
+        <p class="eyebrow">GÜNLÜK TAKİP</p>
+        <div class="heading-row">
+          <div><h1>Denge</h1><p class="date-label" id="todayLabel"></p></div>
+          <span class="avatar" aria-hidden="true">⌁</span>
+        </div>
+      </header>
+
+      <section class="page active" id="homePage" data-page="home" aria-label="Ana Sayfa">
+        <section class="hero-card" aria-labelledby="todayWeightTitle">
+        <p class="card-label" id="todayWeightTitle">BUGÜNKÜ KİLON</p>
+        <div class="weight-line"><strong id="currentWeight">—</strong><span>kg</span></div>
+        <p id="differenceText" class="difference">Bugünkü ölçümünü ekleyerek başla.</p>
+        </section>
+
+        <section class="stats" aria-label="Kilo özeti">
+        <article><p>7 günlük ortalama</p><strong id="averageWeight">—</strong><span>kg</span></article>
+        <article><p>Genel değişim</p><strong id="totalDifference">—</strong><span id="totalUnit">kg</span></article>
+        </section>
+
+        <section class="bmi-card" aria-labelledby="bmiTitle">
+        <div><p class="card-label">VÜCUT KİTLE İNDEKSİ</p><h2 id="bmiTitle">Boyunu ekleyerek hesapla</h2><p id="bmiText">VKİ, boy ve güncel kilo kullanılarak otomatik hesaplanır.</p></div>
+        <div class="bmi-value"><strong id="bmiValue">—</strong><span>VKİ</span></div>
+        <p class="bmi-note">Boyunu Kayıtlar sayfasından ekleyebilirsin. Bu bilgi tıbbi değerlendirme değildir.</p>
+        </section>
+
+        <section class="goal-card" aria-labelledby="goalTitle">
+        <div class="goal-header"><div><p class="card-label">HEDEFİN</p><h2 id="goalTitle">Hedef kilo belirle</h2></div><strong id="goalWeight">—</strong></div>
+        <div class="progress-track" aria-hidden="true"><span id="progressBar"></span></div>
+        <p id="goalText">Hedefini eklediğinde kalan miktarı ve ilerlemeni göreceksin.</p>
+        </section>
+
+        <section class="analysis-card" aria-labelledby="analysisTitle">
+        <div><p class="card-label">YARIN İÇİN ANALİZ</p><h2 id="analysisTitle">Ölçüm bekleniyor</h2></div>
+        <span class="analysis-icon" aria-hidden="true">↗</span>
+        <p id="analysisText">En az iki gün ölçüm eklediğinde değişimi ve eğilimi burada göreceksin.</p>
+        </section>
+      </section>
+
+      <section class="page" id="recipesPage" data-page="recipes" aria-label="Tarifler">
+        <div class="page-title"><p class="eyebrow">BESLENME</p><h2>Yemek tarifleri</h2></div>
+        <section class="recipes" aria-labelledby="recipeTitle">
+        <div class="section-heading"><div><p class="eyebrow">GÜNLÜK BESLENME</p><h2 id="recipeTitle">Bugünün hafif menüsü</h2></div><span id="dailyCalories">— kcal</span></div>
+        <p class="recipe-intro">Porsiyon başına yaklaşık kalori değerleriyle pratik öneriler.</p>
+        <button id="refreshRecipes" class="refresh-recipes" type="button"><span aria-hidden="true">↻</span> Yeni tarifler getir</button>
+        <div id="recipeList" class="recipe-list"></div>
+        <section class="favorites" aria-labelledby="favoritesTitle"><div class="favorites-heading"><h3 id="favoritesTitle">Favori tariflerin</h3><span>♥</span></div><div id="favoritesList" class="favorites-list"><p class="empty-favorites">Beğendiğin tarifleri kalp simgesine dokunarak buraya ekleyebilirsin.</p></div></section>
+        <p class="recipe-note">Kalori değerleri yaklaşık değerlerdir; kişisel ihtiyaçlar değişebilir.</p>
+        </section>
+      </section>
+
+      <section class="page" id="trackingPage" data-page="tracking" aria-label="Kayıtlar">
+        <div class="page-title"><p class="eyebrow">GÜNLÜK TAKİP</p><h2>Ölçüm kayıtların</h2></div>
+        <section class="profile-section" aria-labelledby="profileTitle">
+          <div class="section-heading"><h2 id="profileTitle">Boy bilgisi</h2><span>cm</span></div>
+          <p>VKİ hesabı için boyunu bir kez girmen yeterli.</p>
+          <form id="heightForm" class="height-form">
+            <label class="sr-only" for="heightInput">Boyun, santimetre</label>
+            <input id="heightInput" type="number" min="80" max="250" step="0.1" inputmode="decimal" placeholder="Örn. 170" required />
+            <button type="submit">Boyu kaydet</button>
+          </form>
+        </section>
+        <section class="profile-section" aria-labelledby="targetTitle">
+          <div class="section-heading"><h2 id="targetTitle">Hedef kilo</h2><span>kg</span></div>
+          <p>Ulaşmak istediğin kiloyu gir; Ana Sayfa ilerlemeni hesaplasın.</p>
+          <form id="goalForm" class="goal-form">
+            <label class="sr-only" for="goalInput">Hedef kilon</label>
+            <input id="goalInput" type="number" min="20" max="500" step="0.1" inputmode="decimal" placeholder="Örn. 65" required />
+            <button type="submit">Hedefi kaydet</button>
+          </form>
+        </section>
+        <section class="entry-section" aria-labelledby="entryTitle">
+        <div class="section-heading"><h2 id="entryTitle">Ölçüm ekle</h2><span>kg</span></div>
+        <form id="weightForm">
+          <label class="sr-only" for="weightInput">Kilon</label>
+          <input id="weightInput" type="number" min="20" max="500" step="0.1" inputmode="decimal" placeholder="Örn. 72,4" required />
+          <div class="date-control"><label class="sr-only" for="dateInput">Tarih</label><input id="dateInput" type="date" required /><button id="previousDay" type="button" aria-label="Önceki güne geç" title="Önceki gün">‹</button></div>
+          <button type="submit">Kaydet</button>
+        </form>
+        <p class="hint">Aynı gün yeniden kaydedersen ölçüm güncellenir.</p>
+        </section>
+
+        <section class="history" aria-labelledby="historyTitle">
+        <div class="section-heading"><h2 id="historyTitle">Son ölçümler</h2><div class="history-actions"><button class="history-toggle" id="toggleHistory" type="button" aria-label="Ölçümleri göster" aria-expanded="false" aria-controls="historyContent">⌄</button><button class="clear-button" id="clearButton" type="button">Temizle</button></div></div>
+        <div id="historyContent" class="history-content is-collapsed"><ul id="historyList"><li class="empty">Henüz kayıt yok.</li></ul></div>
+        </section>
+      </section>
+
+      <nav class="bottom-nav" aria-label="Uygulama menüsü">
+        <button class="nav-item active" type="button" data-target="home" aria-label="Ana Sayfa"><span aria-hidden="true">⌂</span><small>Ana Sayfa</small></button>
+        <button class="nav-item" type="button" data-target="recipes" aria-label="Tarifler"><span aria-hidden="true">♧</span><small>Tarifler</small></button>
+        <button class="nav-item" type="button" data-target="tracking" aria-label="Kayıtlar"><span aria-hidden="true">◷</span><small>Kayıtlar</small></button>
+      </nav>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
